@@ -1,0 +1,109 @@
+v00.01.00
+- Consideration, 2 or more device can be controlled using the same channel
+- protocol must be simple to be implemented on a microcontroller with minimum utilization
+- protocol can be accessed using at least a hyperterminal or Arduino Serial Terminal for quick testing
+
+
+// D-Protocol:
+
+"Dxx Command_Code Parameter1 Parameter2 <Return><Line Feed>"  (At least 10mS Transmission interval)
+
+
+// Basic Rules:
+1. Running at 9600bps / 4800bps baudrate.
+2. Every packet must start with ascii character 'D' (0x44) to indicate the start of a D-Protocol packet.
+3. xx is the device/module number.
+4. Each string of the D-Protocol packet is preceeded by the ascii <SPACE> character 0x20. This includes the last string of the packet.
+5. The Command_Code is a fixed length(4 characters) string which tells what register to access
+6. There may be cases that a specific command code requires supporting parameters, these are optional depending on the command used. 
+   Parameters are limited to maximum of 6 characters only. No limit on the minimum number of characters for the parameter.
+7. D-Protocol command is terminated by a return (0x0D) and line feed (0x0A) characters.
+
+			Command Code		Param1		Param2
+Motor Control Commands
+
+// Comment (preceeded by a character '#')
+# This is a comment
+
+
+// Low Level:
+runRightMotor		rRMT			speed		direction
+						0 - 255		'F' - forward
+								'R' - reverse
+
+runLeftMotor		rLMT			speed		direction
+						0 - 255		'F' - forward
+								'R' - reverse
+
+stopRightMotor		sRMT			<none>		<none>
+stopLeftMotor		sLMT			<none>		<none>
+
+
+// High Level:
+moveForward		mFWD			speed		<none>
+						0 - 255
+
+moveBackward		mBCK			speed		<none>
+						0 - 255
+
+turnLeft		tLFT			speed		<none>
+						0 - 255
+
+turnRight		tRGT			speed		<none>
+						0 - 255
+
+rotateLeft		rLFT			speed		<none>
+						0 - 255
+
+rotateRight		rRGT			speed		<none>
+						0 - 255
+
+stopMotors		sPBT			<none>		<none>
+
+
+// Servo:
+setServoAngle		sSVA			angle
+						0 - 255
+incrementServoAngle	iSVA			<none>
+decrementServoAngle	dSVA			<none>	
+
+
+// Telemetry:
+readWallSensorsCommand	rWSC			<none>		<none>
+WallSensorsReadReply	rWSR			State1		State2
+						NONE		
+						LEFT
+						LEFT		CENTER
+						RIGHT
+						RIGHT		CENTER
+						FAR		FRONT
+						NEAR		FRONT
+
+readLineSensorsCommand	rLSC			<none>		<none>
+LineSensorsReadReply	rLSR			State
+						NONE
+						LEFT
+						LEFT		CENTER
+						RIGHT
+						RIGHT		CENTER
+						LINE
+						REAR
+						FRONT
+
+// Battery Voltage
+readBattStatusCommand	rBTC			<none>		<none>
+BattStatusReply		rBTR			xx.xxV	
+
+
+// Custom (even: command, odd: reply)
+readCustomParamCommand	rCM0			<option>	<option>
+CustomParamReply	rCM1			<option>	<option>
+
+// Not Supported COmmand Reply
+CommandNotSupported	cNSP			NOT		KNOWN	
+
+
+
+// Example:
+	for setting servo1 angle to 180 (relative angle), we can send...
+"D01 sSVA 180 <Return><Line Feed>"

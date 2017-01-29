@@ -1,0 +1,23 @@
+
+
+		#############################################################################
+		# P-Bot's RAM is almost full(for AtMega168 based Arduino), there are 	    #
+		# instances I am experiencing stack overflow because of this problem.	    # 
+		# As of the moment I can't think of an elegant solution without 	    #
+		# sacrificing beginner friendliness. 					    #
+		#									    #
+		# To prevent stack overflow, we can choose to limit the size of the 	    #
+		# serial recieve buffer. (Optimization is my plan in the future)	    #
+		#									    #
+		# To do this, simply change the value of the "RX_BUFFER_SIZE" from 	    #
+		# 128byte to 32bytes (anyway you'll be using 1 to 5 bytes most of the time) #
+		# on the file below...							    #
+		#############################################################################
+	   "<Arduino App Location>\arduino-00xx\hardware\arduino\cores\arduino\HardwareSerial.cpp"
+
+
+Regards,
+glutnix_neo
+
+http://www.electronicslab.ph/forum/
+http://www.philrobotics.com/

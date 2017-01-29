@@ -1,0 +1,242 @@
+################################################################################################
+
+PBot Library Release 04 - Compatibility to Arduino v1.0
+
+Author: 	Efren S. Cruzat II
+		(PhilRobotics.com, glutnix_neo of electronicslab.ph/forum)
+
+Files:
+		PBot.cpp 		v01.01.01
+		PBot.h			v01.01.01
+		LowLevelMobot.cpp	v00.01.01
+		LowLevelMobot.h		v00.01.01
+		Telemetry.cpp		v00.01.00
+		Telemetry.h		v00.02.01
+		DProtocol.cpp		v00.01.02
+		DProtocol.h		v00.01.01
+
+		SumoRobot.pde		v01.00.00
+		CrazyMobot.pde		v01.00.00
+		Telemetry.pde		v00.01.00
+		RemoteControlled.pde	v00.01.00
+
+		keywords.txt		v01.00.00
+		D-Protocol.txt		v00.01.00
+
+Changes: 	
+		LowLevelMobot.h
+			Bug Fixes
+		- Modified to use Arduino.h instead of WProgram							 	 		  for compatibility with Arduino v1.0
+
+		DProtocol.cpp
+		- Changed 'F' to "F" for compatibility with Arduino v1.0
+
+		All modules except Telemetry.cpp...
+			Enhancements
+		- Optimized module calls by removing unneccessary includes
+
+Known Limitations:
+
+		For Arduino v0022 and earlier only...
+		#############################################################################
+		# P-Bot's RAM is almost full(for AtMega168 based Arduino), there are 	    #
+		# instances I am experiencing stack overflow because of this problem.	    # 
+		# As of the moment I can't think of an elegant solution without 	    #
+		# sacrificing beginner friendliness. 					    #
+		#									    #
+		# To prevent stack overflow, we can choose to limit the size of the 	    #
+		# serial recieve buffer. (Optimization is my plan in the future)	    #
+		#									    #
+		# To do this, simply change the value of the "RX_BUFFER_SIZE" from 	    #
+		# 128byte to 32bytes (anyway you'll be using 1 to 5 bytes most of the time) #
+		# on the file below...							    #
+		#############################################################################
+		"<Arduino App Location>\arduino-00xx\hardware\arduino\cores\arduino\HardwareSerial.cpp"
+
+
+ToDo:		
+		- code for tacho reporting
+		- code for battery health reporting
+
+################################################################################################
+
+PBot Library Release 03 - With Remote Control
+
+Author: 	Efren S. Cruzat II
+		(PhilRobotics.com, glutnix_neo of electronicslab.ph/forum)
+
+Files:
+		PBot.cpp 		v01.01.00
+		PBot.h			v01.01.00
+		LowLevelMobot.cpp	v00.01.00
+		LowLevelMobot.h		v00.01.00
+		Telemetry.cpp		v00.01.00
+		Telemetry.h		v00.02.00
+		DProtocol.cpp		v00.01.00
+		DProtocol.h		v00.01.00
+
+		SumoRobot.pde		v01.00.00
+		CrazyMobot.pde		v01.00.00
+		Telemetry.pde		v00.01.00
+		RemoteControlled.pde	v00.01.00
+
+		keywords.txt		v01.00.00
+		D-Protocol.txt		v00.01.00
+
+Changes: 	
+		PBot.cpp & PBot.h...
+			Enhancements	
+		- Added Methods for reporting wall and line sensors
+		- Added D-Protocol Functions
+		
+		Telemetry.h
+			Enhancements
+		- reportWallSensors and reportLineSensors methods made public
+
+		keywords.txt
+			Enhancements
+		- updated for library enhancements
+
+		D-Protocol.txt
+			Enhancements
+		- added provision for Battery Health Status Reporting
+		- added provision for Custom Commands
+		- added reply for unsupported commands
+
+		Library...
+			Enhancements
+		- added RemoteControlled.pde sketch on examples
+		- added DProtocol.cpp
+		- added DProtocol.h
+
+Known Limitations:
+
+		#############################################################################
+		# P-Bot's RAM is almost full(for AtMega168 based Arduino), there are 	    #
+		# instances I am experiencing stack overflow because of this problem.	    # 
+		# As of the moment I can't think of an elegant solution without 	    #
+		# sacrificing beginner friendliness. 					    #
+		#									    #
+		# To prevent stack overflow, we can choose to limit the size of the 	    #
+		# serial recieve buffer. (Optimization is my plan in the future)	    #
+		#									    #
+		# To do this, simply change the value of the "RX_BUFFER_SIZE" from 	    #
+		# 128byte to 32bytes (anyway you'll be using 1 to 5 bytes most of the time) #
+		# on the file below...							    #
+		#############################################################################
+		"<Arduino App Location>\arduino-00xx\hardware\arduino\cores\arduino\HardwareSerial.cpp"
+
+
+ToDo:		
+		- code for tacho reporting
+		- code for battery health reporting
+
+################################################################################################
+
+PBot Library Release 02 - With Telemetry
+
+Author: 	Efren S. Cruzat II
+		(PhilRobotics.com, glutnix_neo of electronicslab.ph/forum)
+
+Files:
+		PBot.cpp 		v01.00.00
+		PBot.h			v01.00.00
+		LowLevelMobot.cpp	v00.01.00
+		LowLevelMobot.h		v00.01.00
+		SumoRobot.pde		v01.00.00
+		CrazyMobot.pde		v01.00.00
+		Telemetry.pde		v00.01.00
+		keywords.txt		v01.00.00
+		D-Protocol.txt		v00.00.01
+
+Changes: 	
+		PBot.cpp & PBot.h...	
+		- Added Telemetry Functions
+		- Separate Low Level Mobot files
+		for easy configuration and porting
+
+		SumoRobot.pde...
+		- separate begin method
+
+		CrazyMobot.pde...
+		- separate begin method
+
+		keywords.txt
+
+		Library...
+		- added Telemetry.pde sketch on examples
+		- separate LowLevelMobot class for easy configuration
+
+ToDo:		
+		- code for tacho measurements
+		- code for remote control functions
+
+################################################################################################
+
+PBot Library Release 01 - First Official Release
+
+Author: 	Efren S. Cruzat II
+		(PhilRobotics.com, glutnix_neo of electronicslab.ph/forum)
+
+Files:
+		PBot.cpp 	v00.01.00
+		PBot.h		v00.01.00
+		SumoRobot.pde	v00.01.00
+		CrazyMobot.pde	v00.01.00
+		keywords.txt	v00.01.00
+		D-Protocol.txt	v00.00.01
+
+Changes: 	
+		PBot.cpp...	
+			Bug Fixes
+		- Obstacle sensor polarity inverted
+			Enhancement
+		- Added detection of wall on sides,
+	          useful for micromouse mode 
+                             
+		PBot.h...
+			Enhancements
+		- added KI_OBJECT_BOTHSIDES on obstacle states
+		- defined P-Bot Modes
+
+		SumoRobot.pde
+			Bug Fixes
+		- Adjusted delay timings
+		- Midified Wall Detection Scheme
+			Enhancements
+		- Randomly select which direction
+	     	  to rotate when encountered a line
+		- Used the predefined P-Bot mode
+		  on object creation
+
+		keywords.txt
+		- added keywords for P-Bot Modes
+
+		Library...
+		- added CrazyMobot.pde sketch on examples
+		- defined D-Protocol for RC Mode and telemetry
+
+ToDo:		
+		- code for tacho measurements
+		- code for UART telemetry function
+
+
+################################################################################################
+
+PBot Library Release 01a - Alpha Release
+
+Author: 	Efren S. Cruzat II
+		(PhilRobotics.com, glutnix_neo of electronicslab.ph/forum)
+
+Files:
+		PBot.cpp 	v00.00.02
+		PBot.h		v00.00.02
+		SumoRobot.pde	v00.00.03
+		keywords.txt	v00.00.01
+
+Changes: 	Initial FW Release
+
+ToDo:		Separate class/method for Left/Right motor control for optimum ROM usage
+		Line Following Robot Example
+
+
